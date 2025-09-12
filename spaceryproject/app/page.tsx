@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Carousel from "@/components/layout/carrousel/Carrousel";
 
 export default function HomePage() {
   return (
@@ -15,18 +16,14 @@ export default function HomePage() {
           We created it to connect the curious with the hidden beauty of design.
         </p>
 
-      
-      
+          
+
       </section>
 
       {/* 2. Carousel / Galerie */}
       <section className="relative flex justify-center items-center py-12">
-        {/* Exemple : mettre un carousel plus tard */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
-          <Image src="/img1.jpg" width={400} height={400} alt="Espace 1" />
-          <Image src="/img2.jpg" width={400} height={400} alt="Espace 2" />
-          <Image src="/img3.jpg" width={400} height={400} alt="Espace 3" />
-        </div>
+        {/* Carousel Section */}
+          <Carousel />
       </section>
 
       {/* 3. Cloud de villes */}
