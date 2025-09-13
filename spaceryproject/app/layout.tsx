@@ -33,8 +33,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr">
+
       <body
-        className={`${jersey.variable} antialiased`}
+        className={`${jersey.variable}  antialiased`}
       >
         <Header />
         {children}
