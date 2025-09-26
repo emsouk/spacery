@@ -1,0 +1,13 @@
+@layer components {
+  .swiper-pagination {
+    @apply bottom-[-30px] text-center w-full;
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-black opacity-50 transition-all;
+  }
+
+  .swiper-pagination-bullet-active {
+    @apply bg-red-500 opacity-100 scale-110;
+  }
+}

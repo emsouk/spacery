@@ -1,36 +1,50 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getArt } from "@/app/api/ArtApi"; // ⚡ branché sur Unsplash
+import { useEffect, useState, useRef } from "react";
+import { getArt } from "@/app/api/ArtApi";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+import "./carrousel.css";
 
 export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [artworks, setArtworks] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isPlaying, setIsPlaying] = useState(true); // ✅ état du bouton
+
+  const swiperRef = useRef<any>(null); // ✅ pour accéder à Swiper
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     setLoading(true);
-    //     const data = await getArt("architecture", 30); // ✅ récupère 30 photos
-    //     console.log("Données récupérées:", data); // ✅ vérifier les données
-    //     setArtworks(data);
-    //   } catch {
-    //     setError("Erreur lors du chargement");
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchData();
-  }, []); // [] pour n'exécuter qu'une fois au montage
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await getArt("architecture", 30);
+        setArtworks(data);
+      } catch {
+        setError("Erreur lors du chargement");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const toggleAutoplay = () => {
+    if (!swiperRef.current) return;
+    if (isPlaying) {
+      swiperRef.current.autoplay.stop();
+    } else {
+      swiperRef.current.autoplay.start();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <div className="relative w-full">
@@ -60,11 +74,19 @@ export default function Carousel() {
       {/* === Carrousel === */}
       <div className="relative z-10 w-full max-w-5xl mx-auto">
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={30}
-          loop={artworks.length > 5} // ✅ loop seulement si assez de slides
+          modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+          effect="coverflow"
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 200,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          grabCursor={true}
           centeredSlides={true}
-          autoplay={{ delay: 2000 }}
+          loop={artworks?.length > 5}
+          autoplay={{ delay: 3000 }}
           pagination={{ clickable: true }}
           navigation={{
             nextEl: ".custom-next",
@@ -76,44 +98,44 @@ export default function Carousel() {
             1024: { slidesPerView: 3 },
           }}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          onSwiper={(swiper) => (swiperRef.current = swiper)} // ✅ récupère l’instance
           className="rounded-lg overflow-hidden"
         >
-          {artworks.map((art, index) => (
-            <SwiperSlide key={art.id || index} className="flex justify-center py-6">
-              {/* Texte optionnel */}
-              <p className="text-center text-sm mb-2">
-                {art.alt_description || "Sans description"}
-              </p>
-
-              <div
-                className={`transition-all duration-300 ${
-                  activeIndex === index
-                    ? "scale-105 border-2 border-black rounded-lg bg-white p-2 shadow-lg animate-glow"
-                    : "scale-90 opacity-70"
-                }`}
-                style={{ width: 280, height: 380 }}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={art.urls.full || "/fallback.png"} // ✅ Unsplash direct URL
-                    alt={art.alt_description || "Unsplash photo"}
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                </div>
+          {artworks?.map((art, index) => (
+            <SwiperSlide
+              key={art.id || index}
+              className="flex justify-center py-6"
+              style={{ width: 280, height: 380 }}
+            >
+              <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src={art.urls.regular || "/fallback.png"}
+                  alt={art.alt_description || "Unsplash photo"}
+                  fill
+                  className="object-cover"
+                />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
-        {/* === Boutons custom === */}
+        {/* === Boutons custom navigation === */}
         <button className="custom-prev absolute top-1/2 -left-12 transform -translate-y-1/2 w-10 h-10 bg-white border border-red-500 text-red-500 rounded-full flex items-center justify-center shadow-md hover:bg-red-500 hover:text-white transition z-20">
           ❮
         </button>
         <button className="custom-next absolute top-1/2 -right-12 transform -translate-y-1/2 w-10 h-10 bg-white border border-red-500 text-red-500 rounded-full flex items-center justify-center shadow-md hover:bg-red-500 hover:text-white transition z-20">
           ❯
         </button>
+
       </div>
+
+        {/* === Bouton Pause/Play === */}
+        <button
+          onClick={toggleAutoplay}
+          className="absolute my-3  left-1/2 transform -translate-x-1/2 px-4 py-2 bg-red-500 text-white rounded-full shadow-md hover:scale-105 transition z-20"
+        >
+          {isPlaying ? "❚❚ Pause" : "▶ Play"}
+        </button>
     </div>
   );
 }

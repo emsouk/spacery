@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import Carousel from "@/components/layout/carrousel/Carrousel";
+import CityName from "@/components/layout/city-name/CityName";
+import MainText from "@/components/layout/main-text/MainText";
+import Map from "@/components/layout/map/map";
 
 export default function HomePage() {
   return (
@@ -28,31 +31,17 @@ export default function HomePage() {
 
       {/* 3. Cloud de villes */}
       <section className="text-center py-12 bg-gradient-to-r bg-black">
-        <h2 className="text-2xl font-bold text-white">Villes à explorer</h2>
-        <p className="max-w-xl mx-auto text-white">
-          COPENHAGUE • PARIS • BERLIN • ISTANBUL • HELSINKI • TOKYO • AMSTERDAM
-        </p>
+        <CityName />
       </section>
 
       {/* 4. Texte d’introduction */}
       <section className="max-w-4xl mx-auto px-6 py-16 text-center">
-        <h3 className="text-xl font-bold mb-4">Spacery</h3>
-        <p className="text-gray-700 leading-relaxed">
-          Conçu pour les curieux, les flâneurs, les passionnés de formes et de cultures…
-        </p>
+        <MainText />
       </section>
 
       {/* 5. Carte du monde */}
       <section className="relative py-16 bg-gray-100">
-        <h3 className="text-center text-xl font-bold mb-8">The map for creative minds</h3>
-        <div className="flex justify-center">
-          <Image src="/map.svg" width={800} height={400} alt="Carte du monde" />
-        </div>
-        <div className="text-center mt-6">
-          <button className="px-6 py-3 bg-black text-white rounded hover:bg-gray-700 transition">
-            Rechercher une ville
-          </button>
-        </div>
+        <Map />
       </section>
 
       {/* 6. Travaillons ensemble */}
