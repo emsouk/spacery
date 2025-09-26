@@ -6,6 +6,7 @@ import Carousel from "@/components/layout/carrousel/Carrousel";
 import CityName from "@/components/layout/city-name/CityName";
 import MainText from "@/components/layout/main-text/MainText";
 import Map from "@/components/layout/map/map";
+import WorkTogether from "@/components/layout/work-together/workTogether";
 
 export default function HomePage() {
   return (
@@ -40,39 +41,13 @@ export default function HomePage() {
       </section>
 
       {/* 5. Carte du monde */}
-      <section className="relative py-16 bg-gray-100">
+      <section className="relative py-16 bg-black">
         <Map />
       </section>
 
       {/* 6. Travaillons ensemble */}
-      <section className="py-20 text-center bg-gradient-to-b from-black to-red-900 text-white">
-        <h3 className="text-3xl font-bold mb-12">Travaillons ensemble</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          <div className="bg-white text-black rounded-lg overflow-hidden">
-            <Image src="/musee.jpg" width={300} height={200} alt="Musées" />
-            <p className="py-3 font-semibold">MUSÉES</p>
-          </div>
-          <div className="bg-white text-black rounded-lg overflow-hidden">
-            <Image src="/bar.jpg" width={300} height={200} alt="Bars" />
-            <p className="py-3 font-semibold">BAR / RESTAURANT</p>
-          </div>
-          <div className="bg-white text-black rounded-lg overflow-hidden">
-            <Image src="/agence.jpg" width={300} height={200} alt="Agences" />
-            <p className="py-3 font-semibold">AGENCES</p>
-          </div>
-          <div className="bg-white text-black rounded-lg overflow-hidden">
-            <Image src="/librairie.jpg" width={300} height={200} alt="Librairies" />
-            <p className="py-3 font-semibold">LIBRAIRIES</p>
-          </div>
-        </div>
-        <div className="mt-10">
-          <Link
-            href="/contact"
-            className="inline-block px-6 py-3 bg-white text-black rounded hover:bg-gray-200 transition"
-          >
-            Contactez-nous
-          </Link>
-        </div>
+      <section className="py-20 text-center bg-gradient-to-b from-black  to-white text-white">
+       <WorkTogether />
       </section>
     </main>
   );
