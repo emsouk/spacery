@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Jersey_25 } from "next/font/google";
-import { Plus_Jakarta_Sans } from "next/font/google";
 // import localFont from "next/font/local";
 import "./globals.css";
 
@@ -14,12 +13,6 @@ const jersey = Jersey_25({
   variable: "--font-jersey", // variable CSS utilisée par Tailwind
 });
 
-// 2. Import Plus Jakarta Sans depuis Google Fonts
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"], // Tous les styles
-  variable: "--font-jakarta", // variable CSS utilisée par Tailwind
-});
 
 // 3. Import d’une police locale (optionnel)
 
@@ -34,13 +27,13 @@ export default function RootLayout({
   return (
     <html lang="fr">
 
-      <body
-        className={`${jersey.variable}  antialiased`}
-      >
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <body>
+      <Header />
+
+      {/* {children} */}
+
+      {/* <Footer /> */}
+    </body>
+  </html>
   );
 }

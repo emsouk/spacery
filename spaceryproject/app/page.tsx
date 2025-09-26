@@ -10,7 +10,7 @@ export default function HomePage() {
       {/* 1. Hero Section */}
       <section className="text-center py-10">
         <p className="max-w-2xl font-jakarta  mx-auto text-gray-600 mb-6">We didn’t create Spacery to list spaces.</p>
-          <h1 className="font-jersey text-6xl">SPACERY</h1>
+          <h1 className="text-6xl font-bold ">SPACERY</h1>
         <p className="text-xl font-jakarta mb-6">EXPLORE • FILTER • FEEL</p>
         <p className="max-w-2xl font-jakarta  mx-auto text-gray-600">
           We created it to connect the curious with the hidden beauty of design.
@@ -21,15 +21,15 @@ export default function HomePage() {
       </section>
 
       {/* 2. Carousel / Galerie */}
-      <section className="relative flex justify-center items-center py-12">
+      <section className="relative flex justify-center items-center ">
         {/* Carousel Section */}
           <Carousel />
       </section>
 
       {/* 3. Cloud de villes */}
-      <section className="text-center py-12 bg-gradient-to-r from-black to-red-900 text-white">
-        <h2 className="text-2xl font-bold mb-6">Villes à explorer</h2>
-        <p className="max-w-xl mx-auto">
+      <section className="text-center py-12 bg-gradient-to-r bg-black">
+        <h2 className="text-2xl font-bold text-white">Villes à explorer</h2>
+        <p className="max-w-xl mx-auto text-white">
           COPENHAGUE • PARIS • BERLIN • ISTANBUL • HELSINKI • TOKYO • AMSTERDAM
         </p>
       </section>
