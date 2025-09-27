@@ -9,7 +9,7 @@ export default function WorkTogether() {
   return (
     <section className="text-center py-16">
       {/* === Titre === */}
-      <h3 className="text-5xl font-bold mb-12 text-pink-400">
+      <h3 className="text-5xl font-bold mb-12 text-white">
         Travaillons ensemble
       </h3>
 
@@ -34,8 +34,8 @@ export default function WorkTogether() {
       {/* === Bouton CTA === */}
       <div className="mt-10">
         <Link
-          href="/contact"
-          className="inline-block px-8 py-3 bg-pink-500 text-black font-semibold rounded-full shadow-md hover:bg-pink-600 transition"
+          href="../contact/contact.tsx"
+          className="inline-block px-8 py-3 bg-white text-black font-semibold rounded-full shadow-md hover:bg-red-500 hover:text-white transition"
         >
           CONTACTEZ NOUS
         </Link>

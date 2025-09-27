@@ -1,8 +1,6 @@
-
-
 export const workimages = [
-  { src: "/musee.jpg", alt: "MUSEES" },
-  { src: "/bar.jpg", alt: "BAR / RESTAURANT" },
-  { src: "/agence.jpg", alt: "AGENCE" },
-  { src: "/librairie.jpg", alt: "LIBRAIRIES" },
+  { src: "/deux.svg", alt: "MUSEES" },
+  { src: "/restaurant.svg", alt: "BAR / RESTAURANT" },
+  { src: "/agency.svg", alt: "AGENCE" },
+  { src: "/library.svg", alt: "LIBRAIRIES" },
 ];

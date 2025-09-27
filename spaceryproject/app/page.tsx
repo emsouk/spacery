@@ -23,7 +23,6 @@ export default function HomePage() {
           
 
       </section>
-
       {/* 2. Carousel / Galerie */}
       <section className="relative flex justify-center items-center ">
         {/* Carousel Section */}
@@ -46,7 +45,7 @@ export default function HomePage() {
       </section>
 
       {/* 6. Travaillons ensemble */}
-      <section className="py-20 text-center bg-gradient-to-b from-black  to-white text-white">
+      <section className="py-20 text-center bg-gradient-to-b from-black text-white">
        <WorkTogether />
       </section>
     </main>
