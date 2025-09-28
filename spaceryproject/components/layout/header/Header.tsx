@@ -20,7 +20,7 @@ export default function Header() {
       <nav className="hidden md:flex gap-8 text-gray-800 font-jakarta">
         <Link href="/about">A propos de nous</Link>
         <Link href="/destinations">Destinations</Link>
-        <Link href="/contact">Contact</Link>
+        <Link href="/contact/">Contact</Link>
       </nav>
 
       {/* Bouton Contact */}

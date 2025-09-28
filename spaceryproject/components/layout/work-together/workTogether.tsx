@@ -34,7 +34,7 @@ export default function WorkTogether() {
       {/* === Bouton CTA === */}
       <div className="mt-10">
         <Link
-          href="../contact/contact.tsx"
+          href="/contact"
           className="inline-block px-8 py-3 bg-white text-black font-semibold rounded-full shadow-md hover:bg-red-500 hover:text-white transition"
         >
           CONTACTEZ NOUS
