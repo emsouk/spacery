@@ -1,0 +1,19 @@
+.btn-spacery {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-spacery span {
+  transition: color 0.3s ease;
+}
+
+.btn-spacery:focus {
+  outline: none;
+}
+
+.btn-spacery .circle {
+  transform: scale(0);
+  transition: transform 0.4s ease-out;
+}

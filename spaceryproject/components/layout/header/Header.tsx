@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react"; // icônes hamburger
 
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +27,7 @@ export default function Header() {
       {/* Bouton Contact */}
       <div className="hidden md:block">
         <button className="px-5 py-2 bg-black text-white rounded-full hover:bg-gray-700 transition">
-          Connexion
+             <Link href="/login/">Connexion</Link>
         </button>
       </div>
 
@@ -49,7 +50,8 @@ export default function Header() {
             className="px-5 py-2 bg-black text-white rounded-full hover:bg-gray-700 transition"
             onClick={() => setIsOpen(false)}
           >
-            Connexion
+            <Link href="/login">Connexion</Link>
+    
           </button>
         </div>
       )}
