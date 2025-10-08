@@ -13,7 +13,7 @@ export default function Header() {
     <header className="w-full bg-white shadow-md px-6 py-4 flex items-center justify-between">
       {/* Logo */}
       <div className="flex items-center gap-2">
-         <Link href="/"><Image src="/globe.svg" height={40} width={40} alt="logo Spacery"  /></Link>
+        <Link href="/"><Image src="/globe.svg" height={40} width={40} alt="logo Spacery"  /></Link>
         <Link href="/"><span className="text-xl font-bold text-gray-800">Spacery</span></Link>
       </div>
 
