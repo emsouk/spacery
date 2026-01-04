@@ -20,7 +20,7 @@ export default function Header() {
       {/* Navigation desktop */}
       <nav className="hidden md:flex gap-8 text-gray-800 font-jakarta">
         <Link href="/about">A propos de nous</Link>
-        <Link href="/destinations">Destinations</Link>
+        <Link href="/lieux/">Destinations</Link>
         <Link href="/contact/">Contact</Link>
       </nav>
 
@@ -29,6 +29,7 @@ export default function Header() {
         <button className="px-5 py-2 bg-black text-white rounded-full hover:bg-gray-700 transition">
              <Link href="/login/">Connexion</Link>
         </button>
+           
       </div>
 
       {/* Bouton hamburger (mobile) */}
