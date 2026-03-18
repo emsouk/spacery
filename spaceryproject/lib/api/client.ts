@@ -1,4 +1,7 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+const LOCAL_API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ??
+  (process.env.NODE_ENV === 'development' ? LOCAL_API_BASE_URL : '');
 
 // Définit le type TypeScript pour les options de requête
 interface RequestOptions extends RequestInit {
@@ -22,6 +25,11 @@ class ApiClient {
     endpoint: string,
     options: RequestOptions = {}
   ): Promise<T> {
+    if (!this.baseURL) {
+      throw new Error(
+        "API non configurée. En prod, définis NEXT_PUBLIC_API_URL (URL publique de ton back). En local, démarre l'API sur http://127.0.0.1:8000 ou définis NEXT_PUBLIC_API_URL."
+      );
+    }
     const { params, ...fetchOptions } = options;
 
     // Construction de l'URL avec les paramètres
