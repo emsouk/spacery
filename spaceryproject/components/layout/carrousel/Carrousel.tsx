@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
+import type { Swiper as SwiperCore } from "swiper";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { getArt } from "@/app/api/ArtApi";
@@ -12,14 +13,21 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "./carrousel.css";
 
+type UnsplashPhoto = {
+  id?: string | number;
+  alt_description?: string | null;
+  urls?: {
+    regular?: string;
+  };
+};
+
 export default function Carousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [artworks, setArtworks] = useState<any[]>([]);
+  const [artworks, setArtworks] = useState<UnsplashPhoto[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(true); // ✅ état du bouton
 
-  const swiperRef = useRef<any>(null); // ✅ pour accéder à Swiper
+  const swiperRef = useRef<SwiperCore | null>(null); // ✅ pour accéder à Swiper
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +45,7 @@ export default function Carousel() {
   }, []);
 
   const toggleAutoplay = () => {
-    if (!swiperRef.current) return;
+    if (!swiperRef.current || !swiperRef.current.autoplay) return;
     if (isPlaying) {
       swiperRef.current.autoplay.stop();
     } else {
@@ -97,8 +105,9 @@ export default function Carousel() {
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          onSwiper={(swiper) => (swiperRef.current = swiper)} // ✅ récupère l’instance
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }} // ✅ récupère l’instance
           className="rounded-lg overflow-hidden"
         >
           {artworks?.map((art, index) => (
@@ -109,7 +118,7 @@ export default function Carousel() {
             >
               <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src={art.urls.regular || "/fallback.png"}
+                  src={art.urls?.regular || "/fallback.png"}
                   alt={art.alt_description || "Unsplash photo"}
                   fill
                   className="object-cover"

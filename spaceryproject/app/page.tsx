@@ -1,13 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import Carousel from "@/components/layout/carrousel/Carrousel";
 import CityName from "@/components/layout/city-name/CityName";
 import MainText from "@/components/layout/main-text/MainText";
 import Map from "@/components/layout/map/map";
 import WorkTogether from "@/components/layout/work-together/workTogether";
-import Contact from "@/components/layout/contact/contact";
 
 export default function HomePage() {
   return (

@@ -74,7 +74,8 @@ describe('API Lieux (smoke)', () => {
         return createLieu(apiBaseUrl).then((postResp) => {
           expect([200, 201]).to.include(postResp.status);
           const createdId = postResp.body?.id ?? postResp.body?.lieu?.id;
-          expect(createdId, 'created id').to.exist;
+          expect(createdId, 'created id').to.not.equal(undefined);
+          expect(createdId, 'created id').to.not.equal(null);
           return cy.request(`${apiBaseUrl}/api/lieux/${createdId}`).its('status').should('eq', 200);
         });
       });
@@ -86,7 +87,8 @@ describe('API Lieux (smoke)', () => {
       return createLieu(apiBaseUrl).then((response) => {
         expect([200, 201]).to.include(response.status);
         const createdId = response.body?.id ?? response.body?.lieu?.id;
-        expect(createdId, 'created id').to.exist;
+        expect(createdId, 'created id').to.not.equal(undefined);
+        expect(createdId, 'created id').to.not.equal(null);
 
         // Nettoyage best-effort (ne fait pas échouer le test si l’API refuse le DELETE)
         return cy
@@ -118,4 +120,3 @@ describe('API Lieux (smoke)', () => {
     });
   });
 });
-

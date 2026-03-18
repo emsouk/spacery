@@ -1,7 +1,3 @@
-
-
-const UNSPLASH_URL = "https://api.unsplash.com/photos";
-
 export async function getArt(query = "architecture", perPage = 30) {
   console.log("Fetching art from Unsplash with query:", query, "and perPage:", perPage); // ✅ log des paramètres
   try {

@@ -58,9 +58,9 @@ export default function Contact() {
 
           <div>
             <label className="label">
-              <span className="label-text">Nom de l'entreprise</span>
+              <span className="label-text">Nom de l’entreprise</span>
             </label>
-            <input type="text" placeholder="Votre nom d'entreprise" className="input input-bordered w-full" />
+            <input type="text" placeholder="Votre nom d’entreprise" className="input input-bordered w-full" />
           </div>
           <div>
             <label className="label">
