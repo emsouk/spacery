@@ -1,9 +1,16 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
 
+// Définit le type TypeScript pour les options de requête
 interface RequestOptions extends RequestInit {
   params?: Record<string, string>;
 }
 
+function hasHeader(headers: Headers, name: string): boolean {
+  return headers.has(name);
+}
+
+
+// Classe qui encapsule toute la logique HTTP
 class ApiClient {
   private baseURL: string;
 
@@ -25,12 +32,22 @@ class ApiClient {
     }
 
     // Configuration par défaut
+    const headers = new Headers(fetchOptions.headers);
+    const method = (fetchOptions.method || 'GET').toUpperCase();
+    const hasBody = fetchOptions.body !== undefined && fetchOptions.body !== null;
+
+    // Évite d'ajouter "Content-Type: application/json" sur les GET/HEAD :
+    // ça déclenche un preflight CORS inutile et peut finir en "Failed to fetch".
+    if (hasBody && method !== 'GET' && method !== 'HEAD' && !hasHeader(headers, 'Content-Type')) {
+      headers.set('Content-Type', 'application/json');
+    }
+    if (!hasHeader(headers, 'Accept')) {
+      headers.set('Accept', 'application/json');
+    }
+
     const config: RequestInit = {
       ...fetchOptions,
-      headers: {
-        'Content-Type': 'application/json',
-        ...fetchOptions.headers,
-      },
+      headers,
     };
 
     try {

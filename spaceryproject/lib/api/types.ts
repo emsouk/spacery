@@ -10,6 +10,7 @@ export interface Lieu {
   code_postal: string;
   ville: string;
   pays: string;
+  lat_long?: number;
   payant: boolean;
   description: string;
   image_lieu: string;
