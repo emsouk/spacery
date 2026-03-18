@@ -6,14 +6,16 @@ import gsap from "gsap";
 import "./AnimatedSubmit.css";
 
 export default function Contact() {
-  const btnRef = useRef(null);
-  const circleRef = useRef(null);
-  const textRef = useRef(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const circleRef = useRef<HTMLSpanElement | null>(null);
+  const textRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     const btn = btnRef.current;
     const circle = circleRef.current;
     const text = textRef.current;
+
+    if (!btn || !circle || !text) return;
 
     const tl = gsap.timeline({ paused: true });
     tl.to(circle, { scale: 25, duration: 0.5, ease: "power2.out" }, 0)
