@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 
-// On récupère la clé depuis .env
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY as string;
-
 export default function Map() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+
+  // On récupère la clé depuis .env
+  mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY as string;
 
   useEffect(() => {
     if (map.current) return; // évite re-init
@@ -44,4 +44,3 @@ export default function Map() {
     );
 
 }
-
