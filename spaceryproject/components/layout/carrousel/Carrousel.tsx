@@ -5,35 +5,28 @@ import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper/module
 import type { Swiper as SwiperCore } from "swiper";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import { getArt } from "@/app/api/ArtApi";
-
+import { lieuxService } from "@/lib/api/services/lieux"; 
+import type { Lieu } from "@/lib/api/types";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "./carrousel.css";
 
-type UnsplashPhoto = {
-  id?: string | number;
-  alt_description?: string | null;
-  urls?: {
-    regular?: string;
-  };
-};
+
 
 export default function Carousel() {
-  const [artworks, setArtworks] = useState<UnsplashPhoto[]>([]);
+  const [artworks, setArtworks] = useState<Lieu[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isPlaying, setIsPlaying] = useState(true); // ✅ état du bouton
-
-  const swiperRef = useRef<SwiperCore | null>(null); // ✅ pour accéder à Swiper
+  const [isPlaying, setIsPlaying] = useState(true); 
+  const swiperRef = useRef<SwiperCore | null>(null); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getArt("architecture", 30);
+        const data = await lieuxService.getAll();
         setArtworks(data);
       } catch {
         setError("Erreur lors du chargement");
@@ -112,14 +105,14 @@ export default function Carousel() {
         >
           {artworks?.map((art, index) => (
             <SwiperSlide
-              key={art.id || index}
+              key={art.id}
               className="flex justify-center py-6"
               style={{ width: 280, height: 380 }}
             >
               <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src={art.urls?.regular || "/fallback.png"}
-                  alt={art.alt_description || "Unsplash photo"}
+                  src={art.image_lieu || "/fallback.png"}
+                  alt={art.nom || "Lieu"}
                   fill
                   className="object-cover"
                 />
