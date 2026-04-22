@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { lieuxService, Lieu } from '@/lib/api';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LieuxPage() {
   const [lieux, setLieux] = useState<Lieu[]>([]);
@@ -63,15 +64,15 @@ useEffect(() => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {lieux.map((lieu) => {
 
-            return (
-              <article
-                key={lieu.id}
-                className="group bg-white rounded-lg overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-200"
-              >
-                {/* Image placeholder */}
-                <div className="relative h-64 overflow-hidden">
-                  {lieu.image_lieu ? (
-                    <Image
+	            return (
+	              <article
+	                key={lieu.id}
+	                className="group bg-white rounded-lg overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-200 h-full flex flex-col"
+	              >
+	                {/* Image placeholder */}
+	                <div className="relative h-64 overflow-hidden">
+	                  {lieu.image_lieu ? (
+	                    <Image
                       src={lieu.image_lieu}
                       alt={lieu.nom}
                       fill
@@ -91,27 +92,27 @@ useEffect(() => {
                       {lieu.type.nom_type}
                     </span>
                   </div>
-                </div>
+	                </div>
 
-                {/* Contenu */}
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-black mb-2 group-hover:text-yellow-400 transition-colors">
-                    {lieu.nom}
-                  </h2>
+	                {/* Contenu */}
+	                <div className="p-6 flex flex-col flex-1">
+	                  <h2 className="text-2xl font-bold text-black mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2 min-h-[4rem]">
+	                    {lieu.nom}
+	                  </h2>
 
-                  <div className="text-gray-600 mb-2 text-sm font-medium">
-                    {lieu.ville}, {lieu.pays}
-                  </div>
+	                  <div className="text-gray-600 mb-2 text-sm font-medium line-clamp-1">
+	                    {lieu.ville}, {lieu.pays}
+	                  </div>
 
-                  <p className="text-gray-500 text-sm mb-4">
-                    {lieu.rue}, {lieu.code_postal}
-                  </p>
+	                  <p className="text-gray-500 text-sm mb-4 line-clamp-1">
+	                    {lieu.rue}, {lieu.code_postal}
+	                  </p>
 
-                  <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-                    {lieu.description}
-                  </p>
+	                  <p className="text-gray-700 text-sm mb-4 line-clamp-3 min-h-[3.75rem]">
+	                    {lieu.description}
+	                  </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+	                  <div className="flex flex-wrap gap-2 mb-4">
                     <span
                       className={`px-3 py-1 text-xs font-semibold rounded-full ${
                         lieu.payant
@@ -129,27 +130,30 @@ useEffect(() => {
                     )}
                   </div>
 
-                  {/* Boutons */}
-                  <div className="flex gap-2 pt-4 border-t border-gray-200">
-                    {lieu.site_web && (
-                      <a
-                        href={lieu.site_web}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 bg-black text-white text-center py-2 px-4 rounded hover:bg-gray-800 transition-colors text-sm font-medium"
-                      >
-                        Site web →
-                      </a>
-                    )}
+	                  {/* Boutons */}
+	                  <div className="flex gap-2 pt-4 border-t border-gray-200 mt-auto">
+	                    {lieu.site_web && (
+	                      <a
+	                        href={lieu.site_web}
+	                        target="_blank"
+	                        rel="noopener noreferrer"
+	                        className="flex-1 bg-black text-white text-center py-2 px-4 rounded hover:bg-gray-800 transition-colors text-sm font-medium"
+	                      >
+	                        Site web →
+	                      </a>
+	                    )}
 
-                    <button className="flex-1 border-2 border-black text-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors text-sm font-medium">
-                      Détails
-                    </button>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+	                    <Link
+	                      href={`/lieux/${lieu.id}`}
+	                      className="flex-1 border-2 border-black text-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors text-sm font-medium text-center"
+	                    >
+	                      Détails
+	                    </Link>
+	                  </div>
+	                </div>
+	              </article>
+	            );
+	          })}
         </div>
       </div>
 
